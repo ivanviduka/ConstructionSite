@@ -1,4 +1,4 @@
-@extends('authentication')
+@extends('layouts.authentication')
 
 @section('content')
     <main class="login-form">

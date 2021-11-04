@@ -16,18 +16,27 @@
         </div>
 
         <div>
-            <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="180px" height="140px">
+            <a class="navbar-brand" href="{{route("dashboard")}}">
+            <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="200px" height="150px">
+            </a>
         </div>
 
         <div class="d-flex justify-content-center">
             <h2 class="mt-2 pe-2 border-dark border-end">{{auth()->user()->company_name }}</h2>
-            <form class="container-fluid justify-content-end mt-2">
-                <button class="btn btn-primary" type="button">Company info</button>
-            </form>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
+                    <a class="nav-link" style="color: #cbd5e0" href="{{ route('update.company') }}">
+                        <button class="btn btn-primary " type="button">Company info</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #cbd5e0" href="{{ route('change.password') }}">
+                        <button class="btn btn-primary " type="button">Change Password</button>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" style="color: #cbd5e0" href="{{ route('signout') }}">
-                        <button class="btn btn-primary me-2" type="button">Logout</button>
+                        <button class="btn btn-dark me-1" type="button">Logout</button>
                     </a>
                 </li>
             </ul>

@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::view('/', 'dashboard.homepage')->name('dashboard');
+    Route::get('company-info', [AuthController::class, 'update'])->name('update.company');
+    Route::post('custom-update', [AuthController::class, 'customUpdate'])->name('update.custom');
+    Route::get('password-change', [AuthController::class, 'passwordChange'])->name('change.password');
+    Route::post('password-update', [AuthController::class, 'passwordUpdate'])->name('update.password');
+});
 
 
 

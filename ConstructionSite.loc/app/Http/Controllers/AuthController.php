@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,6 @@ class AuthController extends Controller
     }
 
 
-
     public function registration()
     {
         return view('auth.registration');
@@ -43,7 +43,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'company_name' => 'required|unique:users',
-            'company_cid' => ['required','unique:users', 'regex:/^[0-9]+$/', 'size:11'],
+            'company_cid' => ['required', 'unique:users', 'regex:/^[0-9]+$/', 'size:11'],
             'email' => 'required|email:rfc,dns|unique:users',
             'address' => 'required',
             'city' => 'required|regex:/^[a-žA-Ž]+$/|',
@@ -53,7 +53,7 @@ class AuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("login")->with('success','You have been registered');
+        return redirect("login")->with('success', 'You have been registered');
     }
 
 
@@ -69,18 +69,75 @@ class AuthController extends Controller
         ]);
     }
 
-
-    public function dashboard()
+    public function update()
     {
-        if(Auth::check()){
-            return view('/');
+        return view('auth.company-update');
+    }
+
+    public function customUpdate(Request $request)
+    {
+        $request->validate([
+            'company_name' => 'required|unique:users,company_name,' . auth()->user()->id,
+            'company_cid' => ['required', 'unique:users,company_cid,' . auth()->user()->id, 'regex:/^[0-9]+$/', 'size:11'],
+            'email' => 'required|email:rfc,dns|unique:users,email,' . auth()->user()->id,
+            'address' => 'required',
+            'city' => 'required|regex:/^[a-žA-Ž]+$/|',
+        ]);
+
+        $updatedUser = new User;
+
+        $updatedUser->where('id', auth()->user()->id)->update(
+            ['company_name' => $request->company_name,
+                'company_cid' => $request->company_cid,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+            ]);
+
+        return redirect("/");
+
+
+    }
+
+    public function passwordChange()
+    {
+        return view('auth.password-change');
+    }
+
+    public function passwordUpdate(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|min:6',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        if (Hash::check($request->current_password, auth()->user()->password)) {
+            $updatedUser = new User;
+
+            $updatedUser->where('id', auth()->user()->id)->update(
+                ['password' => Hash::make($request->new_password),]);
+
+            return redirect("/");
+
+        } else {
+            return redirect("password-change")->with('error', 'Current password is incorrect');
         }
 
-        return redirect("login")->with('errors','You are not allowed to access');
     }
 
 
-    public function signOut() {
+    public function dashboard()
+    {
+        if (Auth::check()) {
+            return view('/');
+        }
+        Carbon::createFromDate()->addDays(14);
+        return redirect("login")->with('errors', 'You are not allowed to access');
+    }
+
+
+    public function signOut()
+    {
         Session::flush();
         Auth::logout();
 
