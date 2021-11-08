@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
 
     //Project Routes
-    Route::get('/', [ProjectController::class, 'index'])->name('dashboard');
+    Route::get('/', [ProjectController::class, 'index'])->name('homepage');
     Route::get('new-project', [ProjectController::class, 'createProjectForm'])->name('project.create.form');
     Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
 

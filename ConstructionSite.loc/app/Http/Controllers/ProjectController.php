@@ -3,14 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Repositories\ProjectRepository;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    protected $projects;
+
+    public function __construct(ProjectRepository $projects)
+    {
+
+        $this->projects = $projects;
+    }
+
     //
     public function index()
     {
-        return view('dashboard.homepage');
+        return view('dashboard.homepage', [
+            'projects' => $this->projects->getUserProjects(auth()->user()->id),
+        ]);
     }
 
 
