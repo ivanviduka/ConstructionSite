@@ -10,7 +10,7 @@
 <nav class="navbar navbar-light navbar-expand-lg mb-5 d-flex justify-content-between" style="background-color: #a0aec0;">
 
         <div class="d-flex justify-content-end ms-4">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{route('project.create.form')}}">
                 <button class="btn btn-primary" type="button"> New project</button>
             </a>
         </div>

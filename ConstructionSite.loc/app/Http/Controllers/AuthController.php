@@ -46,7 +46,7 @@ class AuthController extends Controller
             'company_cid' => ['required', 'unique:users', 'regex:/^[0-9]+$/', 'size:11'],
             'email' => 'required|email:rfc,dns|unique:users',
             'address' => 'required',
-            'city' => 'required|regex:/^[a-žA-Ž]+$/|',
+            'city' => 'required|regex:/^[a-žA-Ž ]+$/|',
             'password' => 'required|min:6|confirmed',
         ]);
 
@@ -81,7 +81,7 @@ class AuthController extends Controller
             'company_cid' => ['required', 'unique:users,company_cid,' . auth()->user()->id, 'regex:/^[0-9]+$/', 'size:11'],
             'email' => 'required|email:rfc,dns|unique:users,email,' . auth()->user()->id,
             'address' => 'required',
-            'city' => 'required|regex:/^[a-žA-Ž]+$/|',
+            'city' => 'required|regex:/^[a-žA-Ž ]+$/|',
         ]);
 
         $updatedUser = new User;
@@ -131,7 +131,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return view('/');
         }
-        Carbon::createFromDate()->addDays(14);
+
         return redirect("login")->with('errors', 'You are not allowed to access');
     }
 

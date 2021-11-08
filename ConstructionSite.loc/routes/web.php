@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'dashboard.homepage')->name('dashboard');
+
+    //Project Routes
+    Route::get('/', [ProjectController::class, 'index'])->name('dashboard');
+    Route::get('new-project', [ProjectController::class, 'createProjectForm'])->name('project.create.form');
+    Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
+
+
+
+    //Company info update
     Route::get('company-info', [AuthController::class, 'update'])->name('update.company');
     Route::post('custom-update', [AuthController::class, 'customUpdate'])->name('update.custom');
     Route::get('password-change', [AuthController::class, 'passwordChange'])->name('change.password');

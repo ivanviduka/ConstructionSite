@@ -2,9 +2,9 @@
 
 @section('content')
     <main class="signup-form">
-        <div class="cotainer">
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-8">
 
                     <div class="card">
                         <h3 class="card-header text-center" style="background-color: #a0aec0">REGISTER COMPANY</h3>
