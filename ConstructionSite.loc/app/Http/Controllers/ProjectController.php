@@ -55,4 +55,12 @@ class ProjectController extends Controller
 
         return redirect("/");
     }
+
+    public function deleteProject(int $project_id)
+    {
+
+        Project::where('id', $project_id)->delete();
+
+        return redirect("/");
+    }
 }

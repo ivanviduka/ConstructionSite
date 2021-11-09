@@ -79,7 +79,7 @@
                                         </button>
                                     </form>
 
-                                    <form action="" method="POST">
+                                    <form action="/project/{{$project->id}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
@@ -152,7 +152,7 @@
                                             <button class="btn btn-outline-danger mb-2">Return to Active</button>
                                         </form>
 
-                                        <form action="" method="POST">
+                                        <form action="/project/{{$project->id}}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
@@ -161,6 +161,7 @@
                                                 Delete project
                                             </button>
                                         </form>
+
 
                                     </td>
 

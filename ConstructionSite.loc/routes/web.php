@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('homepage');
     Route::get('new-project', [ProjectController::class, 'createProjectForm'])->name('project.create.form');
     Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
+    Route::delete('project/{project_id}', [ProjectController::class, 'deleteProject'])->name("project.delete");
 
 
 
