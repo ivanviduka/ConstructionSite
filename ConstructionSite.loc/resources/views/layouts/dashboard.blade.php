@@ -10,13 +10,13 @@
 <nav class="navbar navbar-light navbar-expand-lg mb-5 d-flex justify-content-between" style="background-color: #a0aec0;">
 
         <div class="d-flex justify-content-end ms-4">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{route('project.create.form')}}">
                 <button class="btn btn-primary" type="button"> New project</button>
             </a>
         </div>
 
         <div>
-            <a class="navbar-brand" href="{{route("dashboard")}}">
+            <a class="navbar-brand" href="{{route("homepage")}}">
             <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="200px" height="150px">
             </a>
         </div>
