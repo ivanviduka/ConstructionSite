@@ -65,21 +65,19 @@
                                 </td>
 
                                 <td>
-                                    <!-- TODO -- UPDATE FILE NAME -->
-                                    <form action="" method="GET">
+                             
+                                    <a href="/project-info/{{$project->id}}">
                                         <button class="btn btn-outline-secondary mb-2">Update Project</button>
-                                    </form>
+                                    </a>
 
-                                    <form action="" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                    <form action="/update-status/{{$project->id}}" method="GET">
 
                                         <button class="btn btn-outline-success mb-2"
                                         >Completed
                                         </button>
                                     </form>
 
-                                    <form action="" method="POST">
+                                    <form action="/project/{{$project->id}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
@@ -145,14 +143,11 @@
 
                                     <td>
 
-                                        <form action="" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
+                                        <form action="/update-status/{{$project->id}}" method="GET">
                                             <button class="btn btn-outline-danger mb-2">Return to Active</button>
                                         </form>
 
-                                        <form action="" method="POST">
+                                        <form action="/project/{{$project->id}}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
@@ -161,6 +156,7 @@
                                                 Delete project
                                             </button>
                                         </form>
+
 
                                     </td>
 
