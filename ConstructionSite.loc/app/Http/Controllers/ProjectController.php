@@ -56,6 +56,17 @@ class ProjectController extends Controller
         return redirect("/");
     }
 
+    public function changeProjectCompletion(int $project_id)
+    {
+        $currentStatus = $this->projects->getProjectStatus($project_id);
+
+        Project::where('id', $project_id)->update([
+            'is_finished' => !$currentStatus->is_finished,
+        ]);
+
+        return redirect("/");
+    }
+
     public function deleteProject(int $project_id)
     {
 
@@ -63,4 +74,6 @@ class ProjectController extends Controller
 
         return redirect("/");
     }
+
+
 }

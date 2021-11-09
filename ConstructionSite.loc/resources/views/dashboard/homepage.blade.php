@@ -70,9 +70,7 @@
                                         <button class="btn btn-outline-secondary mb-2">Update Project</button>
                                     </form>
 
-                                    <form action="" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                    <form action="/update-status/{{$project->id}}" method="GET">
 
                                         <button class="btn btn-outline-success mb-2"
                                         >Completed
@@ -145,10 +143,7 @@
 
                                     <td>
 
-                                        <form action="" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
+                                        <form action="/update-status/{{$project->id}}" method="GET">
                                             <button class="btn btn-outline-danger mb-2">Return to Active</button>
                                         </form>
 
