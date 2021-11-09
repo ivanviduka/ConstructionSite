@@ -22,56 +22,76 @@
                     <tbody>
                     @foreach ($projects as $project)
                         @if(!$project->is_finished)
-                        <tr>
-                            <td class="table-text">
-                                <a href="#">{{ $project->project_name }}</a>
-                            </td>
+                            <tr>
 
-                            <td class="table-text">
-                                {{ $project->address }}, {{ $project->city }}
-                            </td>
+                                <td class="table-text">
+                                    <a href="#">{{ $project->project_name }}</a>
+                                </td>
 
-                            <td class="table-text">
-                                <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->start_date)->format('d.m.Y') }}</div>
-                            </td>
+                                <td class="table-text">
+                                    {{ $project->address }}, {{ $project->city }}
+                                </td>
 
-                            <td class="table-text">
-                                <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}</div>
-                            </td>
+                                <td class="table-text">
+                                    <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->start_date)->format('d.m.Y') }}</div>
+                                </td>
 
-                            <td class="table-text">
-                                <div>{{ $project->project_type }}</div>
-                            </td>
+                                @if(\Carbon\Carbon::createFromDate($project->deadline_date)->lt(\Carbon\Carbon::now()))
+                                    <td class="table-text">
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}
+                                            <span style="color: red; font-size: 25px">&#33;</span>
+                                        </div>
 
-                            <td class="table-text">
-                                <div>{{ $project->description }}</div>
-                            </td>
+                                    </td>
+                                @elseif(\Carbon\Carbon::createFromDate($project->deadline_date)->lt(\Carbon\Carbon::now()->addDays(14)))
+                                    <td class="table-text">
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}
+                                            <span style="color: #ff870e; font-size: 25px">&#33;</span>
+                                        </div>
 
-                            <td>
-                                <!-- TODO -- UPDATE FILE NAME -->
-                                <form action="" method="GET">
-                                    <button class="btn btn-outline-secondary mb-2">Update Project</button>
-                                </form>
+                                    </td>
+                                @else
+                                    <td class="table-text">
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}</div>
+                                    </td>
+                                @endif
 
-                                <form action="" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                <td class="table-text">
+                                    <div>{{ $project->project_type }}</div>
+                                </td>
 
-                                    <button class="btn btn-outline-success mb-2"
-                                            >Completed</button>
-                                </form>
+                                <td class="table-text">
+                                    <div>{{ $project->description }}</div>
+                                </td>
 
-                                <form action="" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                <td>
+                                    <!-- TODO -- UPDATE FILE NAME -->
+                                    <form action="" method="GET">
+                                        <button class="btn btn-outline-secondary mb-2">Update Project</button>
+                                    </form>
 
-                                    <button class="btn btn-outline-danger mb-2"
-                                            onclick="return confirm('Are you sure you want to delete this Project?')">Delete project</button>
-                                </form>
+                                    <form action="" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
 
-                            </td>
+                                        <button class="btn btn-outline-success mb-2"
+                                        >Completed
+                                        </button>
+                                    </form>
 
-                        </tr>
+                                    <form action="" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+
+                                        <button class="btn btn-outline-danger mb-2"
+                                                onclick="return confirm('Are you sure you want to delete this Project?')">
+                                            Delete project
+                                        </button>
+                                    </form>
+
+                                </td>
+
+                            </tr>
                         @endif
                     @endforeach
                     </tbody>
@@ -97,53 +117,56 @@
                     <tbody>
                     @foreach ($projects as $project)
                         @if($project->is_finished)
-                            <tr>
-                                <td class="table-text">
-                                    <a href="#">{{ $project->project_name }}</a>
-                                </td>
 
-                                <td class="table-text">
-                                    {{ $project->address }}, {{ $project->city }}
-                                </td>
+                                <tr>
+                                    <td class="table-text">
+                                        <a href="#">{{ $project->project_name }}</a>
+                                    </td>
 
-                                <td class="table-text">
-                                    <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->start_date)->format('d.m.Y') }}</div>
-                                </td>
+                                    <td class="table-text">
+                                        {{ $project->address }}, {{ $project->city }}
+                                    </td>
 
-                                <td class="table-text">
-                                    <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}</div>
-                                </td>
+                                    <td class="table-text">
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->start_date)->format('d.m.Y') }}</div>
+                                    </td>
 
-                                <td class="table-text">
-                                    <div>{{ $project->project_type }}</div>
-                                </td>
+                                    <td class="table-text">
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$project->deadline_date)->format('d.m.Y') }}</div>
+                                    </td>
 
-                                <td class="table-text">
-                                    <div>{{ $project->description }}</div>
-                                </td>
+                                    <td class="table-text">
+                                        <div>{{ $project->project_type }}</div>
+                                    </td>
 
-                                <td>
+                                    <td class="table-text">
+                                        <div>{{ $project->description }}</div>
+                                    </td>
 
-                                    <form action="" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                    <td>
 
-                                        <button class="btn btn-outline-danger mb-2">In progress</button>
-                                    </form>
+                                        <form action="" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
 
-                                    <form action="" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                            <button class="btn btn-outline-danger mb-2">Return to Active</button>
+                                        </form>
 
-                                        <button class="btn btn-outline-danger mb-2"
-                                                onclick="return confirm('Are you sure you want to delete this Project?')">Delete project</button>
-                                    </form>
+                                        <form action="" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
 
-                                </td>
+                                            <button class="btn btn-outline-danger mb-2"
+                                                    onclick="return confirm('Are you sure you want to delete this Project?')">
+                                                Delete project
+                                            </button>
+                                        </form>
 
-                            </tr>
-                        @endif
-                    @endforeach
+                                    </td>
+
+                                </tr>
+                            @endif
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -162,7 +185,8 @@
                         5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
                 <div>
-                    You don't have any construction projects <a href="{{ route('project.create.form') }}" class="alert-link">Add your
+                    You don't have any construction projects <a href="{{ route('project.create.form') }}"
+                                                                class="alert-link">Add your
                         first project </a>.
                 </div>
             </div>
