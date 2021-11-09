@@ -65,10 +65,10 @@
                                 </td>
 
                                 <td>
-                                    <!-- TODO -- UPDATE FILE NAME -->
-                                    <form action="" method="GET">
+                             
+                                    <a href="/project-info/{{$project->id}}">
                                         <button class="btn btn-outline-secondary mb-2">Update Project</button>
-                                    </form>
+                                    </a>
 
                                     <form action="/update-status/{{$project->id}}" method="GET">
 

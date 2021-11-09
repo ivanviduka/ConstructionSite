@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('update-status/{project_id}', [ProjectController::class, 'changeProjectCompletion'])->name('project.status');
     Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
     Route::delete('project/{project_id}', [ProjectController::class, 'deleteProject'])->name("project.delete");
+    Route::get('project-info/{project_id}', [ProjectController::class, 'update'])->name('project.update.form');
+    Route::post('project-update', [ProjectController::class, 'updateProject'])->name('project.update');
 
 
 

@@ -7,11 +7,17 @@ use App\Models\Project;
 
 class ProjectRepository
 {
-    public function getUserProjects(int $user_id)
+    public function getUserProjects(int $userID)
     {
-        return Project::where('user_id', $user_id)
+        return Project::where('user_id', $userID)
             ->orderBy('created_at', 'asc')
             ->get();
+    }
+
+    public function getProject(int $id)
+    {
+        return Project::where('id', $id)
+            ->first();
     }
 
     public function getProjectStatus(int $id)
