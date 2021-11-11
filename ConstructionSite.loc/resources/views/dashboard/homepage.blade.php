@@ -112,13 +112,13 @@
                     <th scope="col"></th>
                     </thead>
 
-                    <tbody>
+                    <tbody style="background-color: #74f374">
                     @foreach ($projects as $project)
                         @if($project->is_finished)
 
                                 <tr>
                                     <td class="table-text">
-                                        <a href="#">{{ $project->project_name }}</a>
+                                        <a href="/project-details/{{$project->id}}">{{ $project->project_name }}</a>
                                     </td>
 
                                     <td class="table-text">

@@ -38,46 +38,6 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group mb-3" id="type_buttons">
-                                    <label class="form-label"> Select project type</label>
-                                    @if($project->project_type == 'building')
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="project_type"
-                                                   value="building" id="building_rb"
-                                                   checked>
-                                            <label class="form-check-label" for="building_rb">
-                                                Building
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="project_type"
-                                                   value="house"
-                                                   id="house_rb">
-                                            <label class="form-check-label" for="house_rb">
-                                                House
-                                            </label>
-                                        </div>
-
-                                    @else
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="project_type"
-                                                   value="building" id="building_rb">
-                                            <label class="form-check-label" for="building_rb">
-                                                Building
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="project_type"
-                                                   value="house" id="house_rb" checked>
-                                            <label class="form-check-label" for="house_rb">
-                                                House
-                                            </label>
-                                        </div>
-                                    @endif
-                                    @if ($errors->has('project_type'))
-                                        <span class="text-danger">{{ $errors->first('project_type') }}</span>
-                                    @endif
-                                </div>
 
                                 <div class="form-group mb-3">
                                     <label for="project_desc" class="form-label">Project Description</label>
