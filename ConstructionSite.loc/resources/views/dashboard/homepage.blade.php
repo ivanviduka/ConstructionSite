@@ -25,7 +25,7 @@
                             <tr>
 
                                 <td class="table-text">
-                                    <a href="#">{{ $project->project_name }}</a>
+                                    <a href="/project-details/{{$project->id}}">{{ $project->project_name }}</a>
                                 </td>
 
                                 <td class="table-text">
@@ -65,7 +65,7 @@
                                 </td>
 
                                 <td>
-                             
+
                                     <a href="/project-info/{{$project->id}}">
                                         <button class="btn btn-outline-secondary mb-2">Update Project</button>
                                     </a>

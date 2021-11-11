@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('project-info/{project_id}', [ProjectController::class, 'update'])->name('project.update.form');
     Route::post('project-update', [ProjectController::class, 'updateProject'])->name('project.update');
 
+    //Apartment and floor Routes
+    Route::get('project-details/{project_id}', [ApartmentController::class, 'index'])->name('project-details');
 
 
     //Company info update
