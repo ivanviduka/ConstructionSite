@@ -112,7 +112,7 @@
                     <th scope="col"></th>
                     </thead>
 
-                    <tbody style="background-color: #74f374">
+                    <tbody style="background-color: #40da40">
                     @foreach ($projects as $project)
                         @if($project->is_finished)
 

@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
 
     //Apartment and floor Routes
     Route::get('project-details/{project_id}', [ApartmentController::class, 'index'])->name('project-details');
+    Route::get('new-apartment', [ApartmentController::class, 'createApartmentForm'])->name('apartment.create.form');
+    Route::post('new-apartment', [ApartmentController::class, 'createApartment'])->name('apartment.create');
+    Route::get('new-floor', [ApartmentController::class, 'createFloorForm'])->name('floor.create.form');
+    Route::post('new-floor', [ApartmentController::class, 'createApartment'])->name('apartment.create');
+
 
 
     //Company info update
