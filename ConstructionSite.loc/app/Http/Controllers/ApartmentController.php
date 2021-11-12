@@ -25,33 +25,30 @@ class ApartmentController extends Controller
         $projects = new ProjectRepository();
         $currentProject = $projects->getProject($projectID);
 
-        if($currentProject->user_id != auth()->user()->id){
+        if ($currentProject->user_id != auth()->user()->id) {
             return redirect('/');
         }
 
         session()->put('projectID', $projectID);
 
-        if($currentProject->project_type == 'building'){
-            return view('apartments-floors.building-apartments', [
-                'apartments' => $this->apartments->getProjectApartments($projectID),
-                'projectInfo' => $currentProject,
-            ]);
-        } else
 
-        return view('apartments-floors.house-floors', [
+        return view('apartments-floors.apartments-and-floors', [
             'apartments' => $this->apartments->getProjectApartments($projectID),
             'projectInfo' => $currentProject,
         ]);
+
     }
 
-    public function createApartmentForm(){
+    public function createApartmentForm()
+    {
 
         return view('apartments-floors.create-new-apartment', [
 
         ]);
     }
 
-    public function createFloorForm(){
+    public function createFloorForm()
+    {
 
 
         return view('apartments-floors.create-new-floor', [
@@ -59,14 +56,15 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function createApartment(Request $request){
+    public function createApartment(Request $request)
+    {
         $request->validate([
             'apartment_name' => 'required|max:255',
             'apartment_floor' => 'required|numeric|',
             'apartment_size' => 'required|numeric|min:0',
         ]);
 
-        if(!session()->has('projectID')){
+        if (!session()->has('projectID')) {
             return redirect('/');
         }
 
@@ -77,7 +75,7 @@ class ApartmentController extends Controller
             'project_id' => session()->get('projectID')
         ]);
 
-        return redirect('/project-details/'.session()->get('projectID'));
+        return redirect('/project-details/' . session()->get('projectID'));
 
     }
 }

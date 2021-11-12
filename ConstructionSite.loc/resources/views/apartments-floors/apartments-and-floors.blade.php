@@ -1,35 +1,44 @@
 @extends('layouts.project-details')
 
 
+
+
 @section('title')
-    <title>Building Details</title>
+    <title>
+        {{$projectInfo->project_type == 'building' ? 'Building Details' : 'House Details'}}
+    </title>
+
+
+
 @endsection
 
 @section('creation-text')
     <div class="d-flex justify-content-end ms-4">
-        <a class="navbar-brand" href="{{route('apartment.create.form')}}">
-            <button class="btn btn-primary" type="button">Add apartment</button>
+        <a class="navbar-brand" href="
+            {{route($projectInfo->project_type == 'building' ? 'apartment.create.form' : 'floor.create.form')}}">
+            <button class="btn btn-primary" type="button">
+                {{$projectInfo->project_type == 'building' ? 'Add apartment' : 'Add floor'}}
+            </button>
         </a>
     </div>
 @endsection
 
 @section('content')
-    @if(!empty($projectInfo))
-        <h1 class="text-center">{{$projectInfo->project_name}}</h1>
 
-        <div class="container mb-5">
-            <ul class="list-unstyled">
-                <li><strong>Address: </strong> {{ $projectInfo->address }}, {{ $projectInfo->city }}</li>
-                <li>
-                    <strong>Construction
-                        time: </strong> {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->start_date)->format('d.m.Y') }}
-                    - {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->deadline_date)->format('d.m.Y') }}</li>
-            </ul>
-            <div>
-                <strong>Description: </strong> {{$projectInfo->description}}
-            </div>
+    <h1 class="text-center">{{$projectInfo->project_name}}</h1>
+
+    <div class="container mb-5">
+        <ul class="list-unstyled">
+            <li><strong>Address: </strong> {{ $projectInfo->address }}, {{ $projectInfo->city }}</li>
+            <li>
+                <strong>Construction
+                    time: </strong> {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->start_date)->format('d.m.Y') }}
+                - {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->deadline_date)->format('d.m.Y') }}</li>
+        </ul>
+        <div>
+            <strong>Description: </strong> {{$projectInfo->description}}
         </div>
-    @endif
+    </div>
 
     @if (count($apartments) > 0)
         <div class="container">
@@ -40,6 +49,7 @@
                     <th class="text-center" scope="col">Name</th>
                     <th class="text-center" scope="col">Floor</th>
                     <th class="text-center" scope="col">Square room (m<sup>2</sup>)</th>
+                    <th class="text-center" scope="col"></th>
                     <th class="text-center" scope="col"></th>
                     </thead>
 
@@ -58,11 +68,27 @@
                                 {{ $apartment->squarespace }}
                             </td>
 
-                            <td class="table-text">
+                            <td>
                                 <a href="/apartment-info/{{$apartment->id}}">
-                                    <button class="btn btn-outline-secondary ms-2">Update info</button>
+                                    <button class="btn btn-secondary ms-2">Update info</button>
                                 </a>
 
+                                <form action="/apartment/{{$apartment->id}}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                    <button class="btn btn-danger ms-2 mt-2"
+                                            onclick="return confirm('Are you sure you want to delete this apartment?')">
+                                        Delete apartment
+                                    </button>
+                                </form>
+
+                            </td>
+
+                            <td>
+                                <a href="/problems/{{$apartment->id}}">
+                                    <button class="btn btn-secondary ms-2">Problem list</button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -84,10 +110,13 @@
                         5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
                 <div>
-                    You don't have any apartments inside this building <a href="{{ route('apartment.create.form') }}"
-                                                                          class="alert-link">Add apartment</a>.
+                    You don't have any apartments inside this building
+                    <a href="{{route($projectInfo->project_type == 'building' ? 'apartment.create.form' : 'floor.create.form')}}" class="alert-link">
+                        Add {{$projectInfo->project_type == 'building' ? 'apartment' : 'first floor'}}.
                 </div>
             </div>
         </div>
     @endif
 @endsection
+
+
