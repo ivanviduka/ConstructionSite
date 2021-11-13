@@ -26,11 +26,13 @@ class ProjectController extends Controller
     }
 
 
-    public function createProjectForm(){
+    public function createProjectForm()
+    {
         return view('dashboard.create-project');
     }
 
-    public function createProject(Request $request){
+    public function createProject(Request $request)
+    {
         $request->validate([
             'project_name' => 'required|max:255',
             'address' => 'required',
@@ -66,25 +68,20 @@ class ProjectController extends Controller
         return redirect("/");
     }
 
-    public function update(int $projectID) {
-        $project = $this->projects->getProject($projectID);
+    public function update(int $projectID)
+    {
 
-        if($project->user_id == auth()->user()->id){
-            session()->put('projectId', $projectID);
-            return view('dashboard.update-project',
-                ['project' => $project]);
-        }
-
-        else {
-            return redirect("/");
-        }
+        session()->put('projectId', $projectID);
+        return view('dashboard.update-project',
+            ['project' => Project::find($projectID)]);
 
 
     }
 
-    public function updateProject(Request $request) {
+    public function updateProject(Request $request)
+    {
 
-        if(!session()->has('projectId')){
+        if (!session()->has('projectId')) {
             return redirect("/");
         }
 

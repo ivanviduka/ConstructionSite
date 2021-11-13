@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\Project;
 use App\Repositories\ApartmentRepository;
 use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
@@ -22,19 +23,11 @@ class ApartmentController extends Controller
     public function index(int $projectID)
     {
 
-        $projects = new ProjectRepository();
-        $currentProject = $projects->getProject($projectID);
-
-        if ($currentProject->user_id != auth()->user()->id) {
-            return redirect('/');
-        }
-
         session()->put('projectID', $projectID);
-
 
         return view('apartments-floors.apartments-and-floors', [
             'apartments' => $this->apartments->getProjectApartments($projectID),
-            'projectInfo' => $currentProject,
+            'projectInfo' => Project::find($projectID),
         ]);
 
     }
