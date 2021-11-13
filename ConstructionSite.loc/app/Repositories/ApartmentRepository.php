@@ -12,4 +12,9 @@ class ApartmentRepository
             ->orderBy('created_at', 'asc')
             ->get();
     }
+
+    public function getApartment(int $apartmentID)
+    {
+        return Apartment::find($apartmentID);
+    }
 }

@@ -27,8 +27,8 @@
 
     <h1 class="text-center">{{$projectInfo->project_name}}</h1>
 
-    <div class="container mb-5">
-        <ul class="list-unstyled">
+    <div class="container mb-5" style="font-size: 20px">
+        <ul class="list-unstyled"
             <li><strong>Address: </strong> {{ $projectInfo->address }}, {{ $projectInfo->city }}</li>
             <li>
                 <strong>Construction
@@ -50,6 +50,7 @@
                     <th class="text-center" scope="col">Floor</th>
                     <th class="text-center" scope="col">Square room (m<sup>2</sup>)</th>
                     <th class="text-center" scope="col"></th>
+                    <th class="text-center" scope="col"></th>
                     </thead>
 
                     <tbody>
@@ -69,7 +70,7 @@
 
                             <td>
                                 <a href="/apartment-info/{{$apartment->id}}">
-                                    <button class="btn btn-secondary ms-2">Update info</button>
+                                    <button class="btn btn-info ms-2">Update info</button>
                                 </a>
 
                                 <form action="/apartment/{{$apartment->id}}" method="POST">
@@ -81,8 +82,12 @@
                                         Delete apartment
                                     </button>
                                 </form>
+
+                            </td>
+
+                            <td>
                                 <a href="/problems/{{$apartment->id}}">
-                                    <button class="btn btn-secondary ms-2 mt-2">Problem list</button>
+                                    <button class="btn btn-outline-danger ms-2 mt-2">Problem list</button>
                                 </a>
                             </td>
                         </tr>
