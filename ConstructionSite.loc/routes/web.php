@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::post('new-apartment', [ApartmentController::class, 'createApartment'])->name('apartment.create');
     Route::get('new-floor', [ApartmentController::class, 'createFloorForm'])->name('floor.create.form');
     Route::post('new-floor', [ApartmentController::class, 'createApartment'])->name('apartment.create');
+    Route::delete('apartment/{apartment_id}', [ApartmentController::class, 'deleteApartment'])->name("apartment.delete");
 
 
 

@@ -50,7 +50,6 @@
                     <th class="text-center" scope="col">Floor</th>
                     <th class="text-center" scope="col">Square room (m<sup>2</sup>)</th>
                     <th class="text-center" scope="col"></th>
-                    <th class="text-center" scope="col"></th>
                     </thead>
 
                     <tbody>
@@ -82,12 +81,8 @@
                                         Delete apartment
                                     </button>
                                 </form>
-
-                            </td>
-
-                            <td>
                                 <a href="/problems/{{$apartment->id}}">
-                                    <button class="btn btn-secondary ms-2">Problem list</button>
+                                    <button class="btn btn-secondary ms-2 mt-2">Problem list</button>
                                 </a>
                             </td>
                         </tr>

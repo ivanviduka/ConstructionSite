@@ -78,4 +78,12 @@ class ApartmentController extends Controller
         return redirect('/project-details/' . session()->get('projectID'));
 
     }
+
+    public function deleteApartment(int $apartmentID)
+    {
+
+        Apartment::where('id', $apartmentID)->delete();
+
+        return redirect('/project-details/' . session()->get('projectID'));
+    }
 }
