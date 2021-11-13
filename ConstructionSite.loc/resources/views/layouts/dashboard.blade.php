@@ -15,7 +15,7 @@
             </a>
         </div>
 
-        <div>
+        <div class="d-flex justify-content-center ms-4">
             <a class="navbar-brand" href="{{route("homepage")}}">
             <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="200px" height="150px">
             </a>

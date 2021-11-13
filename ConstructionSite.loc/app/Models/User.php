@@ -47,4 +47,14 @@ class User extends Authenticatable
     ];
 
     protected $table='users';
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function apartments()
+    {
+        return $this->hasManyThrough(Apartment::class, Project::class);
+    }
 }

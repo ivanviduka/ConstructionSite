@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Repositories\ProjectRepository;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -93,7 +92,6 @@ class ProjectController extends Controller
             'project_name' => 'required|max:255',
             'address' => 'required',
             'city' => 'required|regex:/^[a-žA-Ž ]+$/',
-            'project_type' => 'required|in:house,building',
             'start_date' => 'required|date',
             'deadline_date' => 'required|date|after_or_equal:start_date',
         ]);
@@ -107,7 +105,6 @@ class ProjectController extends Controller
             'city' => $request->city,
             'start_date' => $request->start_date,
             'deadline_date' => $request->deadline_date,
-            'project_type' => $request->project_type,
             'description' => $request->project_description,
         ]);
 
