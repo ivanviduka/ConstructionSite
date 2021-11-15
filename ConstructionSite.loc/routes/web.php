@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,9 @@ Route::middleware('auth')->group(function () {
     //Project Routes
     Route::get('/', [ProjectController::class, 'index'])->name('homepage');
     Route::get('new-project', [ProjectController::class, 'createProjectForm'])->name('project.create.form');
-    Route::get('update-status/{project_id}', [ProjectController::class, 'changeProjectCompletion'])->name('project.status');
+    Route::get('update-status/{projectID}', [ProjectController::class, 'changeProjectCompletion'])->name('project.status');
     Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
-    Route::delete('project/{project_id}', [ProjectController::class, 'deleteProject'])->name("project.delete");
+    Route::delete('project/{projectID}', [ProjectController::class, 'deleteProject'])->name("project.delete");
     Route::get('project-info/{projectID}', [ProjectController::class, 'update'])->name('project.update.form')->middleware('AuthResource');
     Route::post('project-update', [ProjectController::class, 'updateProject'])->name('project.update');
 
@@ -34,11 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::post('new-apartment', [ApartmentController::class, 'createApartment'])->name('apartment.create');
     Route::get('new-floor', [ApartmentController::class, 'createFloorForm'])->name('floor.create.form');
     Route::post('new-floor', [ApartmentController::class, 'createApartment'])->name('apartment.create');
-    Route::delete('apartment/{apartment_id}', [ApartmentController::class, 'deleteApartment'])->name("apartment.delete");
+    Route::delete('apartment/{apartmentID}', [ApartmentController::class, 'deleteApartment'])->name("apartment.delete");
     Route::get('apartment-info/{apartmentID}', [ApartmentController::class, 'update'])->name('apartment.update.form')->middleware('ProjectResource');;
     Route::post('apartment-update', [ApartmentController::class, 'updateApartment'])->name('apartment.update');
 
-
+    //Problem Routes
+    Route::get('problems/{apartmentID}', [ProblemController::class, 'index'])->name('apartment.problems');
 
     //Company info update
     Route::get('company-info', [AuthController::class, 'update'])->name('update.company');

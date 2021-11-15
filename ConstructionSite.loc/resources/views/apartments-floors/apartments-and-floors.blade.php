@@ -28,7 +28,7 @@
     <h1 class="text-center">{{$projectInfo->project_name}}</h1>
 
     <div class="container mb-5" style="font-size: 20px">
-        <ul class="list-unstyled"
+        <ul class="list-unstyled">
             <li><strong>Address: </strong> {{ $projectInfo->address }}, {{ $projectInfo->city }}</li>
             <li>
                 <strong>Construction
@@ -112,7 +112,7 @@
                 <div>
                     You don't have any apartments inside this building
                     <a href="{{route($projectInfo->project_type == 'building' ? 'apartment.create.form' : 'floor.create.form')}}" class="alert-link">
-                        Add {{$projectInfo->project_type == 'building' ? 'apartment' : 'first floor'}}.
+                        Add {{$projectInfo->project_type == 'building' ? 'apartment' : 'first floor'}}. </a>
                 </div>
             </div>
         </div>
