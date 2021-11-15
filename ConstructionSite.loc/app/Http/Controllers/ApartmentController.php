@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\Project;
 use App\Repositories\ApartmentRepository;
 use App\Repositories\ProjectRepository;
 use Illuminate\Http\Request;
@@ -22,19 +23,11 @@ class ApartmentController extends Controller
     public function index(int $projectID)
     {
 
-        $projects = new ProjectRepository();
-        $currentProject = $projects->getProject($projectID);
-
-        if ($currentProject->user_id != auth()->user()->id) {
-            return redirect('/');
-        }
-
         session()->put('projectID', $projectID);
-
 
         return view('apartments-floors.apartments-and-floors', [
             'apartments' => $this->apartments->getProjectApartments($projectID),
-            'projectInfo' => $currentProject,
+            'projectInfo' => Project::find($projectID),
         ]);
 
     }
@@ -81,8 +74,10 @@ class ApartmentController extends Controller
 
     public function update(int $apartmentID) {
         $apartment = $this->apartments->getApartment($apartmentID);
-
-        if($apartment->project_id == session()->get('projectID')){
+        session()->put('apartmentID', $apartmentID);
+        return view('apartments-floors.update-info',
+            ['apartment' => $apartment]);
+        /*if($apartment->project_id == session()->get('projectID')){
             session()->put('apartmentID', $apartmentID);
             return view('apartments-floors.update-info',
                 ['apartment' => $apartment]);
@@ -90,7 +85,7 @@ class ApartmentController extends Controller
 
         else {
             return redirect("/");
-        }
+        }*/
 
 
     }
