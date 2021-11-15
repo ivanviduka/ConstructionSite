@@ -86,6 +86,16 @@ class ProblemController extends Controller
         return redirect('/problems/' . $apartmentID);
     }
 
+    public function changeProblemCompletion(int $problemID){
+        $problemStatus = $this->problems->getProblemStatus($problemID);
+
+        Problem::where('id', $problemID)->update([
+            'is_repaired' => !$problemStatus->is_repaired,
+        ]);
+
+        return redirect('/problems/' . session()->get('apartmentID'));
+    }
+
     public function deleteProblem(int $problemID){
 
         $problem = $this->problems->getProblem($problemID);

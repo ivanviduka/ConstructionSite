@@ -45,12 +45,12 @@
                             <tr style="background-color: #40da40" class="border-bottom-2 border border-dark">
                         @else
                             <tr class="border-bottom-2 border-dark">
-                        @endif
+                                @endif
 
                                 <td class="table-text">
                                     @foreach(explode(',', $problem->filepath) as $imageSource)
-                                    <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
-                                         alt="Problem images">
+                                        <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
+                                             alt="Problem images">
 
                                     @endforeach
 
@@ -94,8 +94,12 @@
                                         <button class="btn btn-outline-secondary mb-2">Change details</button>
                                     </a>
 
-                                    <form action="/update-status/{{$problem->id}}" method="GET">
-                                        <button class="btn btn-outline-success mb-2">Done</button>
+                                    <form action="/update-problem/{{$problem->id}}" method="GET">
+                                        @if($problem->is_repaired)
+                                            <button class="btn btn-outline-danger mb-2">Incomplete</button>
+                                        @else
+                                            <button class="btn btn-outline-success mb-2">Done</button>
+                                        @endif
                                     </form>
 
                                     <form action="/problem/{{$problem->id}}" method="POST">
@@ -111,7 +115,7 @@
                                 </td>
 
                             </tr>
-                    @endforeach
+                            @endforeach
                     </tbody>
                 </table>
             </div>
