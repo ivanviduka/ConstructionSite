@@ -16,7 +16,6 @@ class CreateProblemsTable extends Migration
         Schema::create('problems', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('picture_name');
             $table->string('apartment_area');
             $table->date('problem_recorded_date');
             $table->date('repairing_deadline_date');

@@ -28,7 +28,7 @@ class AddFilepathToProblems extends Migration
     {
         Schema::table('problems', function (Blueprint $table) {
             //
-            $table->dropColumn("filepath");
+            $table->dropColumn("filepath", 700);
         });
     }
 }

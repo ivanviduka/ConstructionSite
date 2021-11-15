@@ -6,8 +6,7 @@
 
 @section('creation-text')
     <div class="d-flex justify-content-end ms-4">
-        <a class="navbar-brand" href="
-            ">
+        <a class="navbar-brand" href="{{ route('problem.create.form') }}">
             <button class="btn btn-primary" type="button">Add problem</button>
         </a>
     </div>
@@ -42,19 +41,27 @@
 
                     <tbody>
                     @foreach ($problems as $problem)
-                        @if(!$problem->is_finished)
-                            <tr>
+                        @if($problem->is_repaired)
+                            <tr style="background-color: #40da40" class="border-bottom-2 border border-dark">
+                        @else
+                            <tr class="border-bottom-2 border-dark">
+                        @endif
 
                                 <td class="table-text">
-                                    <a href="/project-details/{{$problem->id}}">{{ $problem->project_name }}</a>
+                                    @foreach(explode(',', $problem->filepath) as $imageSource)
+                                    <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
+                                         alt="Problem images">
+
+                                    @endforeach
+
                                 </td>
 
                                 <td class="table-text">
-                                    {{ $problem->address }}, {{ $problem->city }}
+                                    {{$problem->apartment_area}}
                                 </td>
 
                                 <td class="table-text">
-                                    <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->recorded_date)->format('d.m.Y') }}</div>
+                                    <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->problem_recorded_date)->format('d.m.Y') }}</div>
                                 </td>
 
                                 @if(\Carbon\Carbon::createFromDate($problem->repairing_deadline_date )->lt(\Carbon\Carbon::now()))
@@ -66,7 +73,7 @@
                                     </td>
                                 @elseif(\Carbon\Carbon::createFromDate($problem->repairing_deadline_date )->lt(\Carbon\Carbon::now()->addDays(14)))
                                     <td class="table-text">
-                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->deadline_date)->format('d.m.Y') }}
+                                        <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date)->format('d.m.Y') }}
                                             <span style="color: #ff870e; font-size: 25px">&#33;</span>
                                         </div>
 
@@ -76,10 +83,6 @@
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date )->format('d.m.Y') }}</div>
                                     </td>
                                 @endif
-
-                                <td class="table-text">
-                                    <div>{{ $problem->project_type }}</div>
-                                </td>
 
                                 <td class="table-text">
                                     <div>{{ $problem->description }}</div>
@@ -92,7 +95,7 @@
                                     </a>
 
                                     <form action="/update-status/{{$problem->id}}" method="GET">
-                                        <button class="btn btn-outline-success mb-2">Completed</button>
+                                        <button class="btn btn-outline-success mb-2">Done</button>
                                     </form>
 
                                     <form action="/problem/{{$problem->id}}" method="POST">
@@ -108,7 +111,6 @@
                                 </td>
 
                             </tr>
-                        @endif
                     @endforeach
                     </tbody>
                 </table>
@@ -128,7 +130,7 @@
                 </svg>
                 <div>
                     There aren't any recorded problems.
-                    <a href="{{}}"
+                    <a href="{{ route('problem.create.form') }}"
                        class="alert-link">
                         Open first problem here. </a>
                 </div>

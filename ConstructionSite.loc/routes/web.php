@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
 
     //Problem Routes
     Route::get('problems/{apartmentID}', [ProblemController::class, 'index'])->name('apartment.problems');
+    Route::get('new-problem', [ProblemController::class, 'createProblemForm'])->name('problem.create.form');
+    Route::post('new-problem', [ProblemController::class, 'createProblem'])->name('problem.create');
 
     //Company info update
     Route::get('company-info', [AuthController::class, 'update'])->name('update.company');
