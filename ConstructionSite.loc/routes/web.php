@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('new-floor', [ApartmentController::class, 'createFloorForm'])->name('floor.create.form');
     Route::post('new-floor', [ApartmentController::class, 'createApartment'])->name('apartment.create');
     Route::delete('apartment/{apartment_id}', [ApartmentController::class, 'deleteApartment'])->name("apartment.delete");
-    Route::get('apartment-info/{apartment_id}', [ApartmentController::class, 'update'])->name('apartment.update.form');
+    Route::get('apartment-info/{apartmentID}', [ApartmentController::class, 'update'])->name('apartment.update.form')->middleware('ProjectResource');;
     Route::post('apartment-update', [ApartmentController::class, 'updateApartment'])->name('apartment.update');
 
 

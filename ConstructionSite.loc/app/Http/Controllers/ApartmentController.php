@@ -74,8 +74,10 @@ class ApartmentController extends Controller
 
     public function update(int $apartmentID) {
         $apartment = $this->apartments->getApartment($apartmentID);
-
-        if($apartment->project_id == session()->get('projectID')){
+        session()->put('apartmentID', $apartmentID);
+        return view('apartments-floors.update-info',
+            ['apartment' => $apartment]);
+        /*if($apartment->project_id == session()->get('projectID')){
             session()->put('apartmentID', $apartmentID);
             return view('apartments-floors.update-info',
                 ['apartment' => $apartment]);
@@ -83,7 +85,7 @@ class ApartmentController extends Controller
 
         else {
             return redirect("/");
-        }
+        }*/
 
 
     }
