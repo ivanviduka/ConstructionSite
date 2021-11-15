@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('new-floor', [ApartmentController::class, 'createFloorForm'])->name('floor.create.form');
     Route::post('new-floor', [ApartmentController::class, 'createApartment'])->name('apartment.create');
     Route::delete('apartment/{apartmentID}', [ApartmentController::class, 'deleteApartment'])->name("apartment.delete");
-    Route::get('apartment-info/{apartmentID}', [ApartmentController::class, 'update'])->name('apartment.update.form')->middleware('ProjectResource');;
+    Route::get('apartment-info/{apartmentID}', [ApartmentController::class, 'update'])->name('apartment.update.form')->middleware('ProjectResource');
     Route::post('apartment-update', [ApartmentController::class, 'updateApartment'])->name('apartment.update');
 
     //Problem Routes
@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::post('new-problem', [ProblemController::class, 'createProblem'])->name('problem.create');
     Route::get('update-problem/{problemID}', [ProblemController::class, 'changeProblemCompletion'])->name('problem.status');
     Route::delete('problem/{problemID}', [ProblemController::class, 'deleteProblem'])->name("project.delete");
+    Route::get('problem-info/{problemID}', [ProblemController::class, 'update'])->name('problem.update.form');
+    Route::post('problem-update', [ProblemController::class, 'updateProblem'])->name('problem.update');
 
     //Company info update
     Route::get('company-info', [AuthController::class, 'update'])->name('update.company');

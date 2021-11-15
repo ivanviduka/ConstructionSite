@@ -44,9 +44,8 @@ class ProblemController extends Controller
 
     public function createProblem(Request $request)
     {
-
         $request->validate([
-            'images' => 'required|max:2048',
+            'images' => 'required|max:2048|',
             'images.*' => 'mimes:png,jpg,jpeg,gif,bmp,svg',
             'apartment_room' => 'required|max:255|regex:/^[a-žA-Ž ]+$/',
             'project_description' => 'required|',
@@ -94,6 +93,38 @@ class ProblemController extends Controller
         ]);
 
         return redirect('/problems/' . session()->get('apartmentID'));
+    }
+
+    public function update(int $problemID){
+
+        session()->put('problemID', $problemID);
+
+        return view('problems.update-problem', [
+            'problem' => $this->problems->getProblem($problemID),
+        ]);
+    }
+
+    public function updateProblem(Request $request){
+
+        if(!session()->has('problemID')){
+            return redirect("/");
+        }
+
+        $request->validate([
+            'apartment_room' => 'required|max:255|regex:/^[a-žA-Ž ]+$/',
+            'project_description' => 'required|',
+            'repair_deadline' => 'required|date|after_or_equal:now',
+        ]);
+
+        Problem::where('id', session()->get('problemID'))->update([
+            'apartment_area' => $request->apartment_room,
+            'description' => $request->project_description,
+            'repairing_deadline_date' => $request->repair_deadline,
+        ]);
+
+        session()->forget('problemID');
+        return redirect('/problems/' . session()->get('apartmentID'));
+
     }
 
     public function deleteProblem(int $problemID){

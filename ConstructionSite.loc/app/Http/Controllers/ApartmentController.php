@@ -76,10 +76,10 @@ class ApartmentController extends Controller
     }
 
     public function update(int $apartmentID) {
-        $apartment = $this->apartments->getApartment($apartmentID);
+
         session()->put('apartmentID', $apartmentID);
         return view('apartments-floors.update-info',
-            ['apartment' => $apartment]);
+            ['apartment' => $this->apartments->getApartment($apartmentID)]);
 
     }
 
