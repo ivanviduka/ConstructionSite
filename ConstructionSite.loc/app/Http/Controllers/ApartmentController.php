@@ -68,7 +68,10 @@ class ApartmentController extends Controller
             'project_id' => session()->get('projectID')
         ]);
 
-        return redirect('/project-details/' . session()->get('projectID'));
+        $projectID = session()->get('projectID');
+        session()->forget('projectID');
+
+        return redirect('/project-details/' . $projectID);
 
     }
 
@@ -77,16 +80,6 @@ class ApartmentController extends Controller
         session()->put('apartmentID', $apartmentID);
         return view('apartments-floors.update-info',
             ['apartment' => $apartment]);
-        /*if($apartment->project_id == session()->get('projectID')){
-            session()->put('apartmentID', $apartmentID);
-            return view('apartments-floors.update-info',
-                ['apartment' => $apartment]);
-        }
-
-        else {
-            return redirect("/");
-        }*/
-
 
     }
 

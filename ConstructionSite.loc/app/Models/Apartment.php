@@ -15,4 +15,8 @@ class Apartment extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function problems(){
+        return $this->hasMany(Problem::class);
+    }
 }
