@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('problems/{apartmentID}', [ProblemController::class, 'index'])->name('apartment.problems');
     Route::get('new-problem', [ProblemController::class, 'createProblemForm'])->name('problem.create.form');
     Route::post('new-problem', [ProblemController::class, 'createProblem'])->name('problem.create');
+    Route::delete('problem/{problemID}', [ProblemController::class, 'deleteProblem'])->name("project.delete");
 
     //Company info update
     Route::get('company-info', [AuthController::class, 'update'])->name('update.company');

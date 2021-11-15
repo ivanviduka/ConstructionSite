@@ -7,6 +7,7 @@ use App\Repositories\ApartmentRepository;
 use App\Repositories\ProblemRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProblemController extends Controller
@@ -21,7 +22,8 @@ class ProblemController extends Controller
         $this->problems = $problems;
     }
 
-    public function index(int $apartmentID){
+    public function index(int $apartmentID)
+    {
         $apartmentsRepo = new ApartmentRepository();
 
 
@@ -34,7 +36,8 @@ class ProblemController extends Controller
 
     }
 
-    public function createProblemForm(){
+    public function createProblemForm()
+    {
         return view('problems.create-new-problem');
 
     }
@@ -58,16 +61,12 @@ class ProblemController extends Controller
 
 
         $imagesPaths = "";
-        if($request->hasfile('images'))
-        {
+        if ($request->hasfile('images')) {
 
-            foreach($request->file('images') as $image) {
-
-                $uniqueName = Str::uuid()->toString().".".$image->extension();
+            foreach ($request->file('images') as $image) {
+                $uniqueName = Str::uuid()->toString() . "." . $image->extension();
                 $image->storeAs('problem-images', $uniqueName);
-                $imagesPaths .= $uniqueName.',';
-
-
+                $imagesPaths .= $uniqueName . ',';
             }
 
         }
@@ -84,7 +83,20 @@ class ProblemController extends Controller
             'apartment_id' => $apartmentID,
         ]);
 
-        return redirect('/problems/'.$apartmentID);
+        return redirect('/problems/' . $apartmentID);
+    }
+
+    public function deleteProblem(int $problemID){
+
+        $problem = $this->problems->getProblem($problemID);
+
+        foreach (explode(',', $problem->filepath) as $image){
+            Storage::delete('problem-images/' . $image);
+        }
+
+        Problem::where('id', $problemID)->delete();
+
+        return redirect('/problems/' . session()->get('apartmentID'));
     }
 
 }
