@@ -42,7 +42,7 @@
                     <tbody>
                     @foreach ($problems as $problem)
                         @if($problem->is_repaired)
-                            <tr style="background-color: #40da40" class="border-bottom-2 border border-dark">
+                            <tr class="border-bottom-2 border border-dark table-success">
                         @else
                             <tr class="border-bottom-2 border-dark">
                                 @endif

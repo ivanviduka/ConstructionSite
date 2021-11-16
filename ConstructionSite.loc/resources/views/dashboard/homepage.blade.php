@@ -22,7 +22,7 @@
                     <tbody>
                     @foreach ($projects as $project)
                         @if(!$project->is_finished)
-                            <tr>
+                            <tr class="border-bottom-2 border-dark">
 
                                 <td class="table-text">
                                     <a href="/project-details/{{$project->id}}">{{ $project->project_name }}</a>
@@ -112,11 +112,11 @@
                     <th scope="col"></th>
                     </thead>
 
-                    <tbody style="background-color: #40da40">
+                    <tbody class="table-success">
                     @foreach ($projects as $project)
                         @if($project->is_finished)
 
-                                <tr>
+                                <tr class="border-bottom-2 border-dark">
                                     <td class="table-text">
                                         <a href="/project-details/{{$project->id}}">{{ $project->project_name }}</a>
                                     </td>
