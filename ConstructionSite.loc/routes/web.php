@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     //Project Routes
     Route::get('/', [ProjectController::class, 'index'])->name('homepage');
     Route::get('new-project', [ProjectController::class, 'createProjectForm'])->name('project.create.form');
-    Route::get('update-status/{projectID}', [ProjectController::class, 'changeProjectCompletion'])->name('project.status');
+    Route::get('update-status/{projectID}', [ProjectController::class, 'changeProjectCompletion'])->name('project.status')->middleware('AuthResource');;
     Route::post('new-project', [ProjectController::class, 'createProject'])->name('project.create');
     Route::delete('project/{projectID}', [ProjectController::class, 'deleteProject'])->name("project.delete");
     Route::get('project-info/{projectID}', [ProjectController::class, 'update'])->name('project.update.form')->middleware('AuthResource');
@@ -40,12 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::post('apartment-update', [ApartmentController::class, 'updateApartment'])->name('apartment.update');
 
     //Problem Routes
-    Route::get('problems/{apartmentID}', [ProblemController::class, 'index'])->name('apartment.problems');
+    Route::get('problems/{apartmentID}', [ProblemController::class, 'index'])->name('apartment.problems')->middleware('ProjectResource');
     Route::get('new-problem', [ProblemController::class, 'createProblemForm'])->name('problem.create.form');
     Route::post('new-problem', [ProblemController::class, 'createProblem'])->name('problem.create');
-    Route::get('update-problem/{problemID}', [ProblemController::class, 'changeProblemCompletion'])->name('problem.status');
+    Route::get('update-problem/{problemID}', [ProblemController::class, 'changeProblemCompletion'])->name('problem.status')->middleware('ApartmentResource');;
     Route::delete('problem/{problemID}', [ProblemController::class, 'deleteProblem'])->name("project.delete");
-    Route::get('problem-info/{problemID}', [ProblemController::class, 'update'])->name('problem.update.form');
+    Route::get('problem-info/{problemID}', [ProblemController::class, 'update'])->name('problem.update.form')->middleware('ApartmentResource');
     Route::post('problem-update', [ProblemController::class, 'updateProblem'])->name('problem.update');
 
     //Company info update

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ApartmentResource;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'AuthResource' => \App\Http\Middleware\AuthResource::class,
         'ProjectResource' => \App\Http\Middleware\ProjectResource::class,
+        'ApartmentResource' => ApartmentResource::class,
     ];
 }
