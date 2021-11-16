@@ -47,7 +47,7 @@
                                 <label class="control-label" for="repair_deadline">Repair Deadline</label>
                                 <input class="form-control" id="repair_deadline" name="repair_deadline"
                                        type="date" min="{{\Carbon\Carbon::today()->format('Y-m-d')}}"
-                                       value="{{$problem->repairing_deadline_date}}"required autofocus/>
+                                       value="{{$problem->repairing_deadline_date}}" required autofocus/>
 
                                 @if ($errors->has('repair_deadline'))
                                     <span class="text-danger">{{ $errors->first('repair_deadline') }}</span>
@@ -61,7 +61,6 @@
 
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

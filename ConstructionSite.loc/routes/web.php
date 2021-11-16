@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::middleware('auth')->group(function () {
 
     //Project Routes
@@ -54,9 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::get('password-change', [AuthController::class, 'passwordChange'])->name('change.password');
     Route::post('password-update', [AuthController::class, 'passwordUpdate'])->name('update.password');
 });
-
-
-
 
 //Login Routes
 Route::get('login', [AuthController::class, 'index'])->name('login');

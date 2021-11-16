@@ -69,14 +69,12 @@
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date )->format('d.m.Y') }}
                                             <span style="color: red; font-size: 25px">&#33;</span>
                                         </div>
-
                                     </td>
                                 @elseif(\Carbon\Carbon::createFromDate($problem->repairing_deadline_date )->lt(\Carbon\Carbon::now()->addDays(14)))
                                     <td class="table-text">
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date)->format('d.m.Y') }}
                                             <span style="color: #ff870e; font-size: 25px">&#33;</span>
                                         </div>
-
                                     </td>
                                 @else
                                     <td class="table-text">
@@ -89,7 +87,6 @@
                                 </td>
 
                                 <td>
-
                                     <a href="/problem-info/{{$problem->id}}">
                                         <button class="btn btn-outline-secondary mb-2">Change details</button>
                                     </a>
@@ -134,9 +131,7 @@
                 </svg>
                 <div>
                     There aren't any recorded problems.
-                    <a href="{{ route('problem.create.form') }}"
-                       class="alert-link">
-                        Open first problem here. </a>
+                    <a href="{{ route('problem.create.form') }}" class="alert-link"> Open first problem here. </a>
                 </div>
             </div>
         </div>

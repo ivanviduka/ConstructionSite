@@ -37,8 +37,8 @@
 
                             <div class="form-group mb-3">
                                 <label for="apartment_room" class="form-label">Room where problem is detected</label>
-                                <input type="text" class="form-control" id="apartment_room" name="apartment_room" required
-                                       autofocus>
+                                <input type="text" class="form-control" id="apartment_room" name="apartment_room"
+                                       required autofocus>
                                 @if ($errors->has('apartment_room'))
                                     <span class="text-danger">{{ $errors->first('apartment_room') }}</span>
                                 @endif
@@ -59,13 +59,12 @@
                                 <label class="control-label" for="repair_deadline">Repair Deadline</label>
                                 <input class="form-control" id="repair_deadline" name="repair_deadline"
                                        type="date" min="{{\Carbon\Carbon::today()->format('Y-m-d')}}"
-                                       value="{{\Carbon\Carbon::today()->format('Y-m-d')}}"required autofocus/>
+                                       value="{{\Carbon\Carbon::today()->format('Y-m-d')}}" required autofocus/>
 
                                 @if ($errors->has('repair_deadline'))
                                     <span class="text-danger">{{ $errors->first('repair_deadline') }}</span>
                                 @endif
                             </div>
-
 
                             <button class="btn btn-primary" type="submit">Add Problem</button>
                         </form>
@@ -75,7 +74,6 @@
 
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

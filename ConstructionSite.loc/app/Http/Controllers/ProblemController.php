@@ -18,14 +18,12 @@ class ProblemController extends Controller
 
     public function __construct(ProblemRepository $problems)
     {
-
         $this->problems = $problems;
     }
 
     public function index(int $apartmentID)
     {
         $apartmentsRepo = new ApartmentRepository();
-
 
         session()->put('apartmentID', $apartmentID);
 
@@ -39,7 +37,6 @@ class ProblemController extends Controller
     public function createProblemForm()
     {
         return view('problems.create-new-problem');
-
     }
 
     public function createProblem(Request $request)
@@ -57,7 +54,6 @@ class ProblemController extends Controller
         }
 
         $apartmentID = session()->get('apartmentID');
-
 
         $imagesPaths = "";
         if ($request->hasfile('images')) {
@@ -85,7 +81,8 @@ class ProblemController extends Controller
         return redirect('/problems/' . $apartmentID);
     }
 
-    public function changeProblemCompletion(int $problemID){
+    public function changeProblemCompletion(int $problemID)
+    {
         $problemStatus = $this->problems->getProblemStatus($problemID);
 
         Problem::where('id', $problemID)->update([
@@ -95,7 +92,8 @@ class ProblemController extends Controller
         return redirect('/problems/' . session()->get('apartmentID'));
     }
 
-    public function update(int $problemID){
+    public function update(int $problemID)
+    {
 
         session()->put('problemID', $problemID);
 
@@ -104,9 +102,9 @@ class ProblemController extends Controller
         ]);
     }
 
-    public function updateProblem(Request $request){
-
-        if(!session()->has('problemID')){
+    public function updateProblem(Request $request)
+    {
+        if (!session()->has('problemID')) {
             return redirect("/");
         }
 
@@ -127,11 +125,11 @@ class ProblemController extends Controller
 
     }
 
-    public function deleteProblem(int $problemID){
-
+    public function deleteProblem(int $problemID)
+    {
         $problem = $this->problems->getProblem($problemID);
 
-        foreach (explode(',', $problem->filepath) as $image){
+        foreach (explode(',', $problem->filepath) as $image) {
             Storage::delete('problem-images/' . $image);
         }
 

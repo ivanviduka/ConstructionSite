@@ -13,17 +13,17 @@ class ApartmentResource
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
         $problem = Problem::find($request->route('problemID'));
-        if(empty($problem)) {
+
+        if (empty($problem)) {
             return redirect('/');
         }
-
 
         if ($request->route('problemID')) {
 

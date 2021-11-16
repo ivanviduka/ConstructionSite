@@ -35,8 +35,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="apartment_floor" class="form-label">House Floor</label>
-                                <input type="number" id="apartment_floor"
-                                       class="form-control"
+                                <input type="number" id="apartment_floor" class="form-control"
                                        name="apartment_floor" required autofocus>
                                 @if ($errors->has('apartment_floor'))
                                     <span class="text-danger">{{ $errors->first('apartment_floor') }}</span>
@@ -45,8 +44,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="apartment_size" class="form-label">Floor size (m<sup>2</sup>)</label>
-                                <input type="number" min="0" id="apartment_size"
-                                       class="form-control"
+                                <input type="number" min="0" id="apartment_size" class="form-control"
                                        name="apartment_size" required autofocus>
                                 @if ($errors->has('apartment_size'))
                                     <span class="text-danger">{{ $errors->first('apartment_size') }}</span>
@@ -56,11 +54,8 @@
                         </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

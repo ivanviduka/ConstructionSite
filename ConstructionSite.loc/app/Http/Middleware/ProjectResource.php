@@ -12,24 +12,23 @@ class ProjectResource
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {   $isValid = false;
+    {
+        $isValid = false;
 
         if ($request->route('apartmentID')) {
             $apartment = Apartment::find($request->route('apartmentID'));
             $projects = Project::where('user_id', auth()->user()->id)->get();
 
-
             if (empty($apartment)) {
                 return redirect('/');
-            }
-            else {
-                foreach ($projects as $project){
-                    if($apartment->project_id == $project->id){
+            } else {
+                foreach ($projects as $project) {
+                    if ($apartment->project_id == $project->id) {
                         $isValid = true;
                         break;
                     }
@@ -37,12 +36,11 @@ class ProjectResource
             }
         }
 
-        if($isValid){
+        if ($isValid) {
             return $next($request);
         } else {
             return redirect('/');
         }
-
 
     }
 }
