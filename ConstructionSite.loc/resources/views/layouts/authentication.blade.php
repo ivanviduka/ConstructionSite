@@ -11,10 +11,10 @@
 
 <body>
 
-<nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #2d3344;">
+<nav class="navbar navbar-light navbar-expand-lg mb-5 d-flex justify-content-between" style="background-color: #2d3344;">
     <div class="container">
 
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <div>
             <ul class="nav justify-content-center">
                 @guest
                     <li class="nav-item">
@@ -33,8 +33,6 @@
 
         </div>
     </div>
-
-
 
 </nav>
 

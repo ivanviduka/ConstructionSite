@@ -19,15 +19,15 @@
         </a>
     </div>
 
-    <div class="d-flex justify-content-center" style="margin-left: 90px">
+    <div class="d-none d-lg-flex justify-content-center" style="margin-left: 90px">
         <a class="navbar-brand" href="{{route("homepage")}}">
             <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="200px"
                  height="150px">
         </a>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <h2 class="mt-2 pe-2 border-dark border-end">{{auth()->user()->company_name }}</h2>
+    <div class="d-block d-sm-flex justify-content-center">
+        <h2 class="d-none d-lg-flex mt-2 pe-2 border-dark border-end">{{auth()->user()->company_name }}</h2>
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" style="color: #cbd5e0" href="{{ route('update.company') }}">

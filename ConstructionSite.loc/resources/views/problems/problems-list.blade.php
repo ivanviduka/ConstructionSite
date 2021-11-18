@@ -32,11 +32,11 @@
 
                     <thead>
                     <th scope="col" style="width: 30%">Images</th>
-                    <th scope="col">Room where problem is detected</th>
-                    <th scope="col">Date of detection</th>
-                    <th scope="col">Deadline for resolving problem</th>
+                    <th scope="col" style="width: 12%">Room where problem is detected</th>
+                    <th scope="col" style="width: 12%">Date of detection</th>
+                    <th scope="col" style="width: 12%">Deadline for resolving problem</th>
                     <th scope="col" style="width: 20%">Description</th>
-                    <th scope="col ms-1"></th>
+                    <th scope="col" style="width: 12%"></th>
                     </thead>
 
                     <tbody>
@@ -52,7 +52,7 @@
                                     @foreach(explode(',', $problem->filepath) as $imageSource)
                                         <div class="col-5">
                                             <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
-                                                 alt="Problem images" width="300" height="300">
+                                                 alt="Problem images" width="100%" height="100%">
                                         </div>
                                     @endforeach
 
