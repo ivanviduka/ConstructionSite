@@ -13,7 +13,6 @@ class ProjectController extends Controller
 
     public function __construct(ProjectRepository $projects)
     {
-
         $this->projects = $projects;
     }
 
@@ -24,7 +23,6 @@ class ProjectController extends Controller
             'projects' => $this->projects->getUserProjects(auth()->user()->id),
         ]);
     }
-
 
     public function createProjectForm()
     {
@@ -61,7 +59,7 @@ class ProjectController extends Controller
     {
         $currentStatus = $this->projects->getProjectStatus($projectID);
 
-        Project::where('id', $projectID)->update([
+        Project::find($projectID)->update([
             'is_finished' => !$currentStatus->is_finished,
         ]);
 
@@ -70,17 +68,14 @@ class ProjectController extends Controller
 
     public function update(int $projectID)
     {
-
         session()->put('projectId', $projectID);
         return view('dashboard.update-project',
             ['project' => Project::find($projectID)]);
-
 
     }
 
     public function updateProject(Request $request)
     {
-
         if (!session()->has('projectId')) {
             return redirect("/");
         }
@@ -95,8 +90,7 @@ class ProjectController extends Controller
 
         $updatedProject = new Project;
 
-
-        $updatedProject->where('id', session()->get('projectId'))->update([
+        $updatedProject->find(session()->get('projectId'))->update([
             'project_name' => $request->project_name,
             'address' => $request->address,
             'city' => $request->city,
@@ -112,7 +106,7 @@ class ProjectController extends Controller
     public function deleteProject(int $projectID)
     {
 
-        Project::where('id', $projectID)->delete();
+        Project::find($projectID)->delete();
 
         return redirect("/");
     }

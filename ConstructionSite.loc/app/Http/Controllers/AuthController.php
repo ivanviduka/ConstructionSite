@@ -20,7 +20,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-
     public function customLogin(Request $request)
     {
         $request->validate([
@@ -30,7 +29,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('company_name', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('');
+            return redirect()->intended('/');
         }
 
         return redirect("login")->withErrors('Login details are not valid');
@@ -46,7 +45,6 @@ class AuthController extends Controller
         return view('auth.registration');
     }
 
-
     public function customRegistration(Request $request)
     {
         $request->validate([
@@ -59,7 +57,7 @@ class AuthController extends Controller
         ]);
 
         $data = $request->all();
-        $check = $this->create($data);
+        $this->create($data);
 
         return redirect("login")->with('success', 'You have been registered');
     }
@@ -94,7 +92,7 @@ class AuthController extends Controller
 
         $updatedUser = new User;
 
-        $updatedUser->where('id', auth()->user()->id)->update(
+        $updatedUser->find(auth()->user()->id)->update(
             ['company_name' => $request->company_name,
                 'company_cid' => $request->company_cid,
                 'email' => $request->email,
@@ -103,7 +101,6 @@ class AuthController extends Controller
             ]);
 
         return redirect("/");
-
 
     }
 
@@ -122,7 +119,7 @@ class AuthController extends Controller
         if (Hash::check($request->current_password, auth()->user()->password)) {
             $updatedUser = new User;
 
-            $updatedUser->where('id', auth()->user()->id)->update(
+            $updatedUser->find(auth()->user()->id)->update(
                 ['password' => Hash::make($request->new_password),]);
 
             return redirect("/");
@@ -132,17 +129,6 @@ class AuthController extends Controller
         }
 
     }
-
-
-    public function dashboard()
-    {
-        if (Auth::check()) {
-            return view('/');
-        }
-
-        return redirect("login")->with('errors', 'You are not allowed to access');
-    }
-
 
     public function signOut()
     {

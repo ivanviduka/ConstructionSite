@@ -74,8 +74,9 @@
                                     {{ method_field('DELETE') }}
 
                                     <button class="btn btn-danger ms-2 mt-2"
-                                            onclick="return confirm('Are you sure you want to delete this apartment?')">
-                                        Delete apartment
+                                            onclick="return confirm('Are you sure you want to delete this' +
+                                                ' {{$projectInfo->project_type == 'building' ? 'apartment' : 'floor'}}?')">
+                                        Delete {{$projectInfo->project_type == 'building' ? 'apartment' : 'floor'}}
                                     </button>
                                 </form>
 

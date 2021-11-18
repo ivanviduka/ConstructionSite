@@ -86,7 +86,7 @@ class ApartmentController extends Controller
             'apartment_size' => 'required|numeric|min:0',
         ]);
 
-        Apartment::where('id', session()->get('apartmentID'))->update([
+        Apartment::find(session()->get('apartmentID'))->update([
             'name' => $request->apartment_name,
             'floor' => $request->apartment_floor,
             'squarespace' => $request->apartment_size,
@@ -98,7 +98,7 @@ class ApartmentController extends Controller
 
     public function deleteApartment(int $apartmentID)
     {
-        Apartment::where('id', $apartmentID)->delete();
+        Apartment::find($apartmentID)->delete();
 
         return redirect('/project-details/' . session()->get('projectID'));
     }
