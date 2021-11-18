@@ -6,6 +6,7 @@ use App\Models\Apartment;
 use App\Models\Project;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectResource
 {
@@ -18,25 +19,23 @@ class ProjectResource
      */
     public function handle(Request $request, Closure $next)
     {
-        $isValid = false;
-
         if ($request->route('apartmentID')) {
             $apartment = Apartment::find($request->route('apartmentID'));
-            $projects = Project::where('user_id', auth()->user()->id)->get();
-
-            if (empty($apartment)) {
-                return redirect('/');
-            } else {
-                foreach ($projects as $project) {
-                    if ($apartment->project_id == $project->id) {
-                        $isValid = true;
-                        break;
-                    }
-                }
-            }
+        } else {
+            return redirect('/');
         }
 
-        if ($isValid) {
+        if (empty($apartment)) {
+            return redirect('/');
+        }
+
+        $details = DB::table('apartments')
+            ->join('projects', 'apartments.project_id', '=', 'projects.id')
+            ->select('projects.user_id')
+            ->where('apartments.id', $request->route('apartmentID'))
+            ->first();
+
+        if ($details->user_id == auth()->user()->id) {
             return $next($request);
         } else {
             return redirect('/');

@@ -19,7 +19,7 @@
         </a>
     </div>
 
-    <div class="d-flex justify-content-center ms-4">
+    <div class="d-flex justify-content-center" style="margin-left: 90px">
         <a class="navbar-brand" href="{{route("homepage")}}">
             <img class="border border-dark" src="{{asset('/img/Logo.png')}}" alt="Company logo" width="200px"
                  height="150px">
@@ -31,7 +31,7 @@
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" style="color: #cbd5e0" href="{{ route('update.company') }}">
-                    <button class="btn btn-primary " type="button">Company info</button>
+                    <button class="btn btn-primary" type="button">Company info</button>
                 </a>
             </li>
             <li class="nav-item">

@@ -19,27 +19,29 @@ class ApartmentResource
      */
     public function handle(Request $request, Closure $next)
     {
-        $problem = Problem::find($request->route('problemID'));
+
+        if ($request->route('problemID')) {
+            $problem = Problem::find($request->route('problemID'));
+        } else {
+            return redirect('/');
+        }
 
         if (empty($problem)) {
             return redirect('/');
         }
 
-        if ($request->route('problemID')) {
+        $details = DB::table('problems')
+            ->join('apartments', 'problems.apartment_id', '=', 'apartments.id')
+            ->join('projects', 'apartments.project_id', '=', 'projects.id')
+            ->select('problems.apartment_id', 'projects.user_id')
+            ->where('problems.id', $request->route('problemID'))
+            ->first();
 
-            $details = DB::table('problems')
-                ->join('apartments', 'problems.apartment_id', '=', 'apartments.id')
-                ->join('projects', 'apartments.project_id', '=', 'projects.id')
-                ->select('problems.apartment_id', 'projects.user_id')
-                ->where('problems.id', $request->route('problemID'))
-                ->first();
-
-            if ($details->user_id != auth()->user()->id) {
-                return redirect('/');
-            }
-
-            return $next($request);
+        if ($details->user_id != auth()->user()->id) {
+            return redirect('/');
         }
+
+        return $next($request);
 
 
     }

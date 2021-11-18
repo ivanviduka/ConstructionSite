@@ -47,11 +47,13 @@
                             <tr class="border-bottom-2 border-dark">
                                 @endif
 
-                                <td class="table-text">
-                                    @foreach(explode(',', $problem->filepath) as $imageSource)
-                                        <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
-                                             alt="Problem images">
+                                <td class="row">
 
+                                    @foreach(explode(',', $problem->filepath) as $imageSource)
+                                        <div class="col-5">
+                                            <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
+                                                 alt="Problem images" width="300px" height="300px">
+                                        </div>
                                     @endforeach
 
                                 </td>
