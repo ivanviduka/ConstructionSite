@@ -10,13 +10,13 @@
                 <table class="table table-hover mt-4">
 
                     <thead>
-                    <th scope="col">Project Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">Deadline Date</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"></th>
+                    <th scope="col" style="width: 14%">Project Name</th>
+                    <th scope="col" style="width: 14%">Address</th>
+                    <th scope="col" style="width: 14%">Start Date</th>
+                    <th scope="col" style="width: 14%">Deadline Date</th>
+                    <th scope="col" style="width: 14%">Type</th>
+                    <th scope="col" style="width: 14%">Description</th>
+                    <th scope="col" style="width: 14%"></th>
                     </thead>
 
                     <tbody>
@@ -95,19 +95,19 @@
             </div>
         </div>
 
-        <div class="panel panel-default ms-5 me-5">
+        <div class="panel panel-default m-5">
             <div class="panel-body">
                 <h2>Finished Projects</h2>
                 <table class="table table-hover mt-4">
 
                     <thead>
-                    <th scope="col">Project Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">Deadline Date</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"></th>
+                    <th scope="col" style="width: 14%">Project Name</th>
+                    <th scope="col" style="width: 14%">Address</th>
+                    <th scope="col" style="width: 14%">Start Date</th>
+                    <th scope="col" style="width: 14%">Deadline Date</th>
+                    <th scope="col" style="width: 14%">Type</th>
+                    <th scope="col" style="width: 14%">Description</th>
+                    <th scope="col" style="width: 14%"></th>
                     </thead>
 
                     <tbody class="table-success">

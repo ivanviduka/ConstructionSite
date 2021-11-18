@@ -31,12 +31,12 @@
                 <table class="table table-hover mt-4 ">
 
                     <thead>
-                    <th scope="col">Images</th>
+                    <th scope="col" style="width: 30%">Images</th>
                     <th scope="col">Room where problem is detected</th>
                     <th scope="col">Date of detection</th>
                     <th scope="col">Deadline for resolving problem</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"></th>
+                    <th scope="col" style="width: 20%">Description</th>
+                    <th scope="col ms-1"></th>
                     </thead>
 
                     <tbody>
@@ -47,12 +47,12 @@
                             <tr class="border-bottom-2 border-dark">
                                 @endif
 
-                                <td class="row">
+                                <td class="row me-0">
 
                                     @foreach(explode(',', $problem->filepath) as $imageSource)
                                         <div class="col-5">
                                             <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
-                                                 alt="Problem images" width="300px" height="300px">
+                                                 alt="Problem images" width="300" height="300">
                                         </div>
                                     @endforeach
 
@@ -84,7 +84,7 @@
                                     </td>
                                 @endif
 
-                                <td class="table-text">
+                                <td class="table-text" style="word-wrap: anywhere;">
                                     <div>{{ $problem->description }}</div>
                                 </td>
 
