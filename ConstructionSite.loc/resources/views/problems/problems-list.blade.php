@@ -31,12 +31,12 @@
                 <table class="table table-hover mt-4 ">
 
                     <thead>
-                    <th scope="col">Images</th>
-                    <th scope="col">Room where problem is detected</th>
-                    <th scope="col">Date of detection</th>
-                    <th scope="col">Deadline for resolving problem</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"></th>
+                    <th scope="col" style="width: 30%">Images</th>
+                    <th scope="col" style="width: 12%">Room where problem is detected</th>
+                    <th scope="col" style="width: 12%">Date of detection</th>
+                    <th scope="col" style="width: 12%">Deadline for resolving problem</th>
+                    <th scope="col" style="width: 20%">Description</th>
+                    <th scope="col" style="width: 12%"></th>
                     </thead>
 
                     <tbody>
@@ -47,11 +47,13 @@
                             <tr class="border-bottom-2 border-dark">
                                 @endif
 
-                                <td class="table-text">
-                                    @foreach(explode(',', $problem->filepath) as $imageSource)
-                                        <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
-                                             alt="Problem images">
+                                <td class="row me-0">
 
+                                    @foreach(explode(',', $problem->filepath) as $imageSource)
+                                        <div class="col-5">
+                                            <img class="img-fluid img-thumbnail" src="{{asset('images/'.$imageSource)}}"
+                                                 alt="Problem images" width="100%" height="100%">
+                                        </div>
                                     @endforeach
 
                                 </td>
@@ -69,14 +71,12 @@
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date )->format('d.m.Y') }}
                                             <span style="color: red; font-size: 25px">&#33;</span>
                                         </div>
-
                                     </td>
                                 @elseif(\Carbon\Carbon::createFromDate($problem->repairing_deadline_date )->lt(\Carbon\Carbon::now()->addDays(14)))
                                     <td class="table-text">
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$problem->repairing_deadline_date)->format('d.m.Y') }}
                                             <span style="color: #ff870e; font-size: 25px">&#33;</span>
                                         </div>
-
                                     </td>
                                 @else
                                     <td class="table-text">
@@ -84,12 +84,11 @@
                                     </td>
                                 @endif
 
-                                <td class="table-text">
+                                <td class="table-text" style="word-wrap: anywhere;">
                                     <div>{{ $problem->description }}</div>
                                 </td>
 
                                 <td>
-
                                     <a href="/problem-info/{{$problem->id}}">
                                         <button class="btn btn-outline-secondary mb-2">Change details</button>
                                     </a>
@@ -134,9 +133,7 @@
                 </svg>
                 <div>
                     There aren't any recorded problems.
-                    <a href="{{ route('problem.create.form') }}"
-                       class="alert-link">
-                        Open first problem here. </a>
+                    <a href="{{ route('problem.create.form') }}" class="alert-link"> Open first problem here. </a>
                 </div>
             </div>
         </div>

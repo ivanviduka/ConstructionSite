@@ -1,14 +1,10 @@
 @extends('layouts.project-details')
 
 
-
-
 @section('title')
     <title>
         {{$projectInfo->project_type == 'building' ? 'Building Details' : 'House Details'}}
     </title>
-
-
 
 @endsection
 
@@ -31,8 +27,8 @@
         <ul class="list-unstyled">
             <li><strong>Address: </strong> {{ $projectInfo->address }}, {{ $projectInfo->city }}</li>
             <li>
-                <strong>Construction
-                    time: </strong> {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->start_date)->format('d.m.Y') }}
+                <strong>Construction time: </strong>
+                {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->start_date)->format('d.m.Y') }}
                 - {{ \Carbon\Carbon::createFromFormat('Y-m-d',$projectInfo->deadline_date)->format('d.m.Y') }}</li>
         </ul>
         <div>
@@ -78,8 +74,9 @@
                                     {{ method_field('DELETE') }}
 
                                     <button class="btn btn-danger ms-2 mt-2"
-                                            onclick="return confirm('Are you sure you want to delete this apartment?')">
-                                        Delete apartment
+                                            onclick="return confirm('Are you sure you want to delete this' +
+                                                ' {{$projectInfo->project_type == 'building' ? 'apartment' : 'floor'}}?')">
+                                        Delete {{$projectInfo->project_type == 'building' ? 'apartment' : 'floor'}}
                                     </button>
                                 </form>
 
@@ -111,7 +108,8 @@
                 </svg>
                 <div>
                     You don't have any apartments inside this building
-                    <a href="{{route($projectInfo->project_type == 'building' ? 'apartment.create.form' : 'floor.create.form')}}" class="alert-link">
+                    <a href="{{route($projectInfo->project_type == 'building' ? 'apartment.create.form' : 'floor.create.form')}}"
+                       class="alert-link">
                         Add {{$projectInfo->project_type == 'building' ? 'apartment' : 'first floor'}}. </a>
                 </div>
             </div>

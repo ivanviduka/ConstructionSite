@@ -18,14 +18,12 @@ class ProblemController extends Controller
 
     public function __construct(ProblemRepository $problems)
     {
-
         $this->problems = $problems;
     }
 
     public function index(int $apartmentID)
     {
         $apartmentsRepo = new ApartmentRepository();
-
 
         session()->put('apartmentID', $apartmentID);
 
@@ -39,7 +37,6 @@ class ProblemController extends Controller
     public function createProblemForm()
     {
         return view('problems.create-new-problem');
-
     }
 
     public function createProblem(Request $request)
@@ -49,7 +46,7 @@ class ProblemController extends Controller
             'images.*' => 'mimes:png,jpg,jpeg,gif,bmp,svg',
             'apartment_room' => 'required|max:255|regex:/^[a-žA-Ž ]+$/',
             'project_description' => 'required|',
-            'repair_deadline' => 'required|date|after_or_equal:now',
+            'repair_deadline' => 'required|date|after_or_equal:today',
         ]);
 
         if (!session()->has('apartmentID')) {
@@ -57,17 +54,12 @@ class ProblemController extends Controller
         }
 
         $apartmentID = session()->get('apartmentID');
-
+        session()->forget('apartmentID');
 
         $imagesPaths = "";
         if ($request->hasfile('images')) {
 
-            foreach ($request->file('images') as $image) {
-                $uniqueName = Str::uuid()->toString() . "." . $image->extension();
-                $image->storeAs('problem-images', $uniqueName);
-                $imagesPaths .= $uniqueName . ',';
-            }
-
+            $imagesPaths = $this->saveImages($request, $imagesPaths);
         }
 
         $imagesPaths = rtrim($imagesPaths, ',');
@@ -85,17 +77,19 @@ class ProblemController extends Controller
         return redirect('/problems/' . $apartmentID);
     }
 
-    public function changeProblemCompletion(int $problemID){
+    public function changeProblemCompletion(int $problemID)
+    {
         $problemStatus = $this->problems->getProblemStatus($problemID);
 
-        Problem::where('id', $problemID)->update([
+        Problem::find($problemID)->update([
             'is_repaired' => !$problemStatus->is_repaired,
         ]);
 
         return redirect('/problems/' . session()->get('apartmentID'));
     }
 
-    public function update(int $problemID){
+    public function update(int $problemID)
+    {
 
         session()->put('problemID', $problemID);
 
@@ -104,16 +98,16 @@ class ProblemController extends Controller
         ]);
     }
 
-    public function updateProblem(Request $request){
-
-        if(!session()->has('problemID')){
+    public function updateProblem(Request $request)
+    {
+        if (!session()->has('problemID')) {
             return redirect("/");
         }
 
         $request->validate([
             'apartment_room' => 'required|max:255|regex:/^[a-žA-Ž ]+$/',
             'project_description' => 'required|',
-            'repair_deadline' => 'required|date|after_or_equal:now',
+            'repair_deadline' => 'required|date|after_or_equal:today',
         ]);
 
         Problem::where('id', session()->get('problemID'))->update([
@@ -127,17 +121,40 @@ class ProblemController extends Controller
 
     }
 
-    public function deleteProblem(int $problemID){
-
+    public function deleteProblem(int $problemID)
+    {
         $problem = $this->problems->getProblem($problemID);
 
-        foreach (explode(',', $problem->filepath) as $image){
-            Storage::delete('problem-images/' . $image);
-        }
+        $this->deleteImagesFromStorage($problem);
 
-        Problem::where('id', $problemID)->delete();
+        Problem::find($problemID)->delete();
 
         return redirect('/problems/' . session()->get('apartmentID'));
+    }
+
+    /**
+     * @param Request $request
+     * @param string $imagesPaths
+     * @return string
+     */
+    public function saveImages(Request $request, string $imagesPaths): string
+    {
+        foreach ($request->file('images') as $image) {
+            $uniqueName = Str::uuid()->toString() . "." . $image->extension();
+            $image->storeAs('problem-images', $uniqueName);
+            $imagesPaths .= $uniqueName . ',';
+        }
+        return $imagesPaths;
+    }
+
+    /**
+     * @param $problem
+     */
+    public function deleteImagesFromStorage($problem): void
+    {
+        foreach (explode(',', $problem->filepath) as $image) {
+            Storage::delete('problem-images/' . $image);
+        }
     }
 
 }

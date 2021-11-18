@@ -15,17 +15,15 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Company Name" id="name" class="form-control"
-                                           name="company_name"
-                                           required autofocus>
+                                           name="company_name" required autofocus>
                                     @if ($errors->has('company_name'))
                                         <span class="text-danger">{{ $errors->first('company_name') }}</span>
                                     @endif
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="CID/Company OIB" id="company_cid" class="form-control"
-                                           name="company_cid"
-                                           required autofocus>
+                                    <input type="text" placeholder="CID/Company OIB (11 digits)" id="company_cid"
+                                           class="form-control" name="company_cid" required autofocus>
                                     @if ($errors->has('company_cid'))
                                         <span class="text-danger">{{ $errors->first('company_cid') }}</span>
                                     @endif
@@ -33,8 +31,7 @@
 
                                 <div class="form-group mb-3">
                                     <input type="email" placeholder="Company Email" id="email_address"
-                                           class="form-control"
-                                           name="email" required autofocus>
+                                           class="form-control" name="email" required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
@@ -42,8 +39,7 @@
 
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Street Address" id="street_address"
-                                           class="form-control"
-                                           name="address" required autofocus>
+                                           class="form-control" name="address" required autofocus>
                                     @if ($errors->has('address'))
                                         <span class="text-danger">{{ $errors->first('address') }}</span>
                                     @endif
@@ -51,8 +47,7 @@
 
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="City" id="city"
-                                           class="form-control"
-                                           name="city" required autofocus>
+                                           class="form-control" name="city" required autofocus>
                                     @if ($errors->has('city'))
                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                     @endif
@@ -68,8 +63,7 @@
 
                                 <div class="form-group mb-3">
                                     <input type="password" placeholder="Confirm Password" id="password_confirmation"
-                                           class="form-control"
-                                           name="password_confirmation" required>
+                                           class="form-control" name="password_confirmation" required>
                                     @if ($errors->has('password_confirmation'))
                                         <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                     @endif

@@ -13,33 +13,35 @@ class ApartmentResource
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        $problem = Problem::find($request->route('problemID'));
-        if(empty($problem)) {
+
+        if ($request->route('problemID')) {
+            $problem = Problem::find($request->route('problemID'));
+        } else {
             return redirect('/');
         }
 
-
-        if ($request->route('problemID')) {
-
-            $details = DB::table('problems')
-                ->join('apartments', 'problems.apartment_id', '=', 'apartments.id')
-                ->join('projects', 'apartments.project_id', '=', 'projects.id')
-                ->select('problems.apartment_id', 'projects.user_id')
-                ->where('problems.id', $request->route('problemID'))
-                ->first();
-
-            if ($details->user_id != auth()->user()->id) {
-                return redirect('/');
-            }
-
-            return $next($request);
+        if (empty($problem)) {
+            return redirect('/');
         }
+
+        $details = DB::table('problems')
+            ->join('apartments', 'problems.apartment_id', '=', 'apartments.id')
+            ->join('projects', 'apartments.project_id', '=', 'projects.id')
+            ->select('problems.apartment_id', 'projects.user_id')
+            ->where('problems.id', $request->route('problemID'))
+            ->first();
+
+        if ($details->user_id != auth()->user()->id) {
+            return redirect('/');
+        }
+
+        return $next($request);
 
 
     }

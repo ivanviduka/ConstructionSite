@@ -12,7 +12,6 @@
     </div>
 @endsection
 
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -27,8 +26,7 @@
                             <div class="form-group mb-3">
                                 <label for="apartment_name" class="form-label">Apartment Name</label>
                                 <input type="text" class="form-control" id="apartment_name" name="apartment_name"
-                                       required
-                                       autofocus>
+                                       required autofocus>
                                 @if ($errors->has('apartment_name'))
                                     <span class="text-danger">{{ $errors->first('apartment_name') }}</span>
                                 @endif
@@ -37,8 +35,7 @@
                             <div class="form-group mb-3">
                                 <label for="apartment_floor" class="form-label">Apartment Floor</label>
                                 <input type="number" id="apartment_floor"
-                                       class="form-control"
-                                       name="apartment_floor" required autofocus>
+                                       class="form-control" name="apartment_floor" required autofocus>
                                 @if ($errors->has('apartment_floor'))
                                     <span class="text-danger">{{ $errors->first('apartment_floor') }}</span>
                                 @endif
@@ -47,8 +44,7 @@
                             <div class="form-group mb-3">
                                 <label for="apartment_size" class="form-label">Apartment size (m<sup>2</sup>)</label>
                                 <input type="number" min="0" id="apartment_size"
-                                       class="form-control"
-                                       name="apartment_size" required autofocus>
+                                       class="form-control" name="apartment_size" required autofocus>
                                 @if ($errors->has('apartment_size'))
                                     <span class="text-danger">{{ $errors->first('apartment_size') }}</span>
                                 @endif
@@ -58,10 +54,8 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

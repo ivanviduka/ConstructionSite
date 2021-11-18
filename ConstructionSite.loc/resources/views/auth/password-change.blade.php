@@ -21,8 +21,7 @@
                             @csrf
                             <div class="form-group mb-3">
                                 <input type="password" placeholder="Current Password" id="current_password"
-                                       class="form-control"
-                                       name="current_password" required>
+                                       class="form-control" name="current_password" required>
                                 @if ($errors->has('current_password'))
                                     <span class="text-danger">{{ $errors->first('current_password') }}</span>
                                 @endif
@@ -38,8 +37,7 @@
 
                             <div class="form-group mb-3">
                                 <input type="password" placeholder="Confirm New Password" id="new_password_confirmation"
-                                       class="form-control"
-                                       name="new_password_confirmation" required>
+                                       class="form-control" name="new_password_confirmation" required>
                                 @if ($errors->has('new_password_confirmation'))
                                     <span class="text-danger">{{ $errors->first('new_password_confirmation') }}</span>
                                 @endif

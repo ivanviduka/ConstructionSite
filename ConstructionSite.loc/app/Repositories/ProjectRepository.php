@@ -16,14 +16,11 @@ class ProjectRepository
 
     public function getProject(int $id)
     {
-        return Project::where('id', $id)
-            ->first();
+        return Project::find($id);
     }
 
     public function getProjectStatus(int $id)
     {
-        return Project::select('is_finished')->where('id', $id)
-            ->orderBy('created_at', 'asc')
-            ->first();
+        return Project::select('is_finished')->find($id);
     }
 }

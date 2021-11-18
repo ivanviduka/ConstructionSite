@@ -21,9 +21,9 @@ class ApartmentRepository
 
     public function getFullDetails(int $apartmentID)
     {
-        return  DB::table('apartments')
+        return DB::table('apartments')
             ->join('projects', 'apartments.project_id', '=', 'projects.id')
-            ->select('apartments.id','apartments.name', 'apartments.floor', 'apartments.squarespace',
+            ->select('apartments.id', 'apartments.name', 'apartments.floor', 'apartments.squarespace',
                 'projects.address', 'projects.city')
             ->where('apartments.id', $apartmentID)
             ->first();
